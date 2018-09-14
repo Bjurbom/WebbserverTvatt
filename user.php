@@ -44,7 +44,7 @@
 				<div class="top-info"><span>Monday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+					<li class="single-event" data-start="09:30" data-end="10:30" data-content="php-intags/strandered" data-event="event-1">
 						<a href="#0">
 							<em class="event-name">Tor</em>
 						</a>
@@ -97,7 +97,7 @@
 			<li class="events-group">
 				<div class="top-info"><span>Wednesday</span></div>
 
-				<ul>
+				<!--<ul>
 					<li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
 						<a href="#0">
 							<em class="event-name">Restorative Yoga</em>
@@ -121,7 +121,7 @@
 							<em class="event-name">Yoga Level 1</em>
 						</a>
 					</li>
-				</ul>
+				</ul>-->
 			</li>
 
 			<li class="events-group">
@@ -200,7 +200,7 @@
 
 	<div class="cover-layer"></div>
 </div> <!-- .cd-schedule -->
-<script src="/assets/js/modernizr.js"></script>
+<script src="assets/js/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 <script>
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
