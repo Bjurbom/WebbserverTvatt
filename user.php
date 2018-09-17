@@ -1,8 +1,16 @@
 <?php
 	include("includes/config.php");
 
+	$adress = "hejvägen 23";
+
+	$myquery = mysqli_query($con,"SELECT * FROM users WHERE adress='$adress'");
+
+	$row = mysqli_fetch_array($myquery);
+	$name = $row['adress'];
+	echo($name);
+
 	if(!isset($_SESSION['userLoggedIn'])){
-	//	header("Location: index.php");
+		//header("Location: index.php");
 	}
 
 	
