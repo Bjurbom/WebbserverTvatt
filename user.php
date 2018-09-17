@@ -1,21 +1,58 @@
+<?php
+	include("includes/config.php");
+
+	if(!isset($_SESSION['userLoggedIn'])){
+	//	header("Location: index.php");
+	}
+
+	
+
+		
+	
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Schema</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="assets/css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="assets/css/user.css"> 
 
 </head>
 <body>
+<div class="header">
+
+<h1>Schema upplägg</h1>
+
+<div id="profileInfo">
+	<h2>Profile</h2> <br>
+
+	<img src="insertlink">
+
+
+
+	<p>namn: <?php $_SESSION['namn']?></p>
+
+
+
+</div>
+
+</div>
+
+
+
+
 <div class="cd-schedule loading">
 	<div class="timeline">
 		<ul>
+			<li><span>08:00</span></li>
+			<li><span>08:30</span></li>
 			<li><span>09:00</span></li>
 			<li><span>09:30</span></li>
 			<li><span>10:00</span></li>
@@ -44,7 +81,7 @@
 				<div class="top-info"><span>Monday</span></div>
 
 				<ul>
-					<li class="single-event" data-start="09:30" data-end="10:30" data-content="php-intags/strandered" data-event="event-1">
+					<li class="single-event" data-start="09:30" data-end="10:30" data-content="php-intags/strandereLogin" data-event="event-1">
 						<a href="#0">
 							<em class="event-name">Tor</em>
 						</a>
