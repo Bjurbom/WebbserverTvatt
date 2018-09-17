@@ -19,7 +19,7 @@
             $ecryptedPw = md5($pw);
 
             //see if the same username and same ecrypted password exist in the database
-            $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$ecryptedPw'");
+            $query = mysqli_query($this->con, "SELECT * FROM users WHERE lägenhetsnummer='$un' AND lösenord='$ecryptedPw'");
 
 
             //if it finds one profile the the login was succesfull

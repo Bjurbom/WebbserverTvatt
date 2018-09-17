@@ -9,7 +9,7 @@
     $timezone = date_default_timezone_set("Europe/Stockholm");
 
     //conneting to the database
-    $con = mysqli_connect("localhost", "root", "", "slotify");
+    $con = mysqli_connect("localhost", "root", "", "tvattstugan");
 
     //if it doesn't connect
     if(mysqli_connect_errno()){

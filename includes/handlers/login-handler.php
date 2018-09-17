@@ -14,7 +14,12 @@ if(isset($_POST['loginButton'])) {
     if($result){
         
         $_SESSION['userLoggedIn'] =$username;
+		if($username == "admin"){
+			header("Location: admin.php")
+		}
+		else{
         header("Location: index.php");
+		}
     }
 	
 }
