@@ -20,7 +20,8 @@
 
             //see if the same username and same ecrypted password exist in the database
             $query = mysqli_query($this->con, "SELECT * FROM users WHERE lägenhetsnummer='$un' AND lösenord='$ecryptedPw'");
-
+			
+			echo($query[0]);
 
             //if it finds one profile the the login was succesfull
             if(mysqli_num_rows($query) == 1) {

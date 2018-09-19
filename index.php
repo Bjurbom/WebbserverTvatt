@@ -43,7 +43,7 @@
             <div id="inputContainer">
 
                 <!-- login fome-->
-                <form id="loginForm" action="register.php" method="POST" >
+                <form id="loginForm" action="index.php" method="POST" >
 
                     
 
