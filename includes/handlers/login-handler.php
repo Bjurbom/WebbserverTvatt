@@ -10,6 +10,8 @@ if(isset($_POST['loginButton'])) {
     //try to login
     $result = $account->login($username,$Password);
     
+    echo($username);
+    echo($Password);
     //if succesfull the redirect to index.php and gives session the username of the user 
     if($result){
         

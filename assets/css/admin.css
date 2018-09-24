@@ -1,0 +1,17 @@
+html, body{
+
+    padding: 0;
+    margin: 0;
+    height: 100%;
+
+}
+
+.leftContainer{
+    width: 30%;
+    height: 100vh;
+    
+}
+.header{
+    width:40%;
+
+}

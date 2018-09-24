@@ -4,6 +4,7 @@
         //var
         private $con;
         private $errorArray;
+        
 
         public function __construct($con){
 
@@ -18,6 +19,7 @@
             //ecrypte the password with a SIMPLE ecrypte algo
             $ecryptedPw = md5($pw);
 
+            
             //see if the same username and same ecrypted password exist in the database
             $query = mysqli_query($this->con, "SELECT * FROM users WHERE lägenhetsnummer='$un' AND lösenord='$ecryptedPw'");
 			
