@@ -18,7 +18,7 @@ if(isset($_POST['loginButton'])) {
 			header("Location: admin.php");
 		}
 		else{
-        header("Location: index.php");
+        header("Location: user.php");
 		}
     }
 	
