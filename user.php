@@ -10,7 +10,7 @@
 	echo($name);
 
 	if(!isset($_SESSION['userLoggedIn'])){
-		//header("Location: index.php");
+		header("Location: index.php");
 	}
 
 	
