@@ -13,7 +13,7 @@ if(isset($_POST['loginButton'])) {
     //if succesfull the redirect to index.php and gives session the username of the user 
     if($result){
         
-        $_SESSION['userLoggedIn'] =$username;
+        $_SESSION['userLoggedIn'] = $username;
 		if($username == "admin"){
 			header("Location: admin.php");
 		}

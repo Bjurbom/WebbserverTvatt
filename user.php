@@ -1,5 +1,6 @@
 <?php
 	include("includes/config.php");
+	include("includes/handlers/schema-handler.php");
 
 	$adress = "hejvägen 23";
 
@@ -7,10 +8,14 @@
 
 	$row = mysqli_fetch_array($myquery);
 	$name = $row['adress'];
-	echo($name);
+	
 
 	if(!isset($_SESSION['userLoggedIn'])){
 		header("Location: index.php");
+	}
+
+	if(isset($_POST['logout'])){
+		echo "hello";
 	}
 
 	
@@ -41,15 +46,17 @@
 <div id="profileInfo">
 	<h2>Profile</h2> <br>
 
-	<img src="insertlink">
+	<img src="">
 
 
 
-	<p>namn: <?php $_SESSION['namn']?></p>
+	<p>namn: <?php $_SESSION['userLoggedIn']?></p>
 
 
 
 </div>
+
+<input value="Logout" type="button">
 
 </div>
 
@@ -244,6 +251,8 @@
 	</div>
 
 	<div class="cover-layer"></div>
+
+
 </div> <!-- .cd-schedule -->
 <script src="assets/js/modernizr.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -251,5 +260,8 @@
 	if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
 </script>
 <script src="assets/js/main.js"></script> <!-- Resource jQuery -->
+
+
+	
 </body>
 </html>
