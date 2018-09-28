@@ -1,11 +1,12 @@
 <?php
 	include("includes/config.php");
 	include("includes/handlers/schema-handler.php");
-
+    $id = $_SESSION['userLoggedIn'];
 	$adress = "hejvägen 23";
 
 	$myquery = mysqli_query($con,"SELECT * FROM users WHERE adress='$adress'");
-
+    $query = $con->query("SELECT bild FROM users WHERE lagenhetsnummer = '$id'");
+	 
 	$row = mysqli_fetch_array($myquery);
 	$name = $row['adress'];
 	
@@ -46,7 +47,7 @@
 <div id="profileInfo">
 	<h2>Profile</h2> <br>
 
-	<img src="">
+	<img src="<?php $query ?>">
 
 
 
