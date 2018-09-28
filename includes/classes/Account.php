@@ -22,7 +22,7 @@
             
             //see if the same username and same ecrypted password exist in the database
             $query = mysqli_query($this->con, "SELECT * FROM users WHERE lagenhetsnummer='$un' AND losenord='$ecryptedPw'");
-			
+            			
             
             
             //if it finds one profile the the login was succesfull
