@@ -47,22 +47,22 @@
 
                     
 
-                    <h2>Login to you account</h2>
+                    <h2>Logga in i ditt konto</h2>
                     <p>
 
                     <!--Error messages-->
                         <!-- it see if something goes wrong using function in Account-->
                     <?php echo $account->getError(Constants::$loginFailed);?>
-                        <label for="loginUsername">Username</label>
+                        <label for="loginUsername">Lägenhetsnummer</label>
                         <input id="loginUsername" name="loginUsername" type="text" placeholder="e.g Bart"  value="<?php getInputValue('loginUsername')?>" required>
                     </p>
                     
                     <p>
-                        <label for="loginPassword">Password</label>
+                        <label for="loginPassword">Lösenord</label>
                         <input id="loginPassword" name="loginPassword" type="Password" placeholder="" required> 
                     </p>
 
-                    <button type="submit" name="loginButton">LOGIN</button>
+                    <button type="submit" name="loginButton">LOGGA IN</button>
                     <div class="hasAccountText">
                         
                         

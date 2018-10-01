@@ -1,8 +1,10 @@
 <?php
 
-    $id = $_SESSION['userLoggedIn'];
+    $agare = $_SESSION['userLoggedIn'];
 
-    $query = "SELECT * FROM `users` WHERE `lagenhetsnummer`='$id'"
+    $query = null;
+
+    $query = "SELECT * FROM `users` WHERE `lagenhetsnummer`='$agera'"
 
     
 

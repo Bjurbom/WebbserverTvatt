@@ -13,7 +13,7 @@ class Constants {
     public static $emailTaken = "This Email already exists";
 
 
-    public static $loginFailed = "Your username or password is invailed";
+    public static $loginFailed = "Ditt lägenhetsnummer eller lösenord stämmer inte";
 }
 
 ?>
