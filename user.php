@@ -57,7 +57,11 @@
 
 </div>
 
-<input value="Logout" type="button">
+<input value="Logout" type="button" action="<?php
+ session_destroy();
+ 
+ 
+ ?>">
 
 </div>
 
