@@ -1,6 +1,6 @@
 <?php
 	include("includes/config.php");
-	include("includes/handlers/schema-handler.php");
+
     $id = $_SESSION['userLoggedIn'];
 	$adress = "hejvägen 23";
 
@@ -34,8 +34,6 @@
 
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/reset.css"> <!-- CSS reset -->
-	<link rel="stylesheet" href="assets/css/style.css"> <!-- Resource style -->
 	<link rel="stylesheet" href="assets/css/user.css"> 
 
 </head>
@@ -56,6 +54,8 @@
 
 
 </div>
+
+<?php 	include("includes/handlers/schema-handler.php"); ?>
 
 <input value="Logout" type="button" action="<?php
  session_destroy();
