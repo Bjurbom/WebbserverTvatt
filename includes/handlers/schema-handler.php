@@ -3,7 +3,7 @@
     $agare = $_SESSION['userLoggedIn'];
 
 
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM schemat";
 if($result = mysqli_query($con, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table>";
@@ -15,10 +15,10 @@ if($result = mysqli_query($con, $sql)){
             echo "</tr>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
-                echo "<td>" . $row['lagenhetsnummer'] . "</td>";
-                echo "<td>" . $row['namn'] . "</td>";
-                echo "<td>" . $row['adress'] . "</td>";
-                echo "<td>" . $row['bild'] . "</td>";
+                echo "<td>" . $row['ägare'] . "</td>";
+                echo "<td>" . $row['tidForBokning'] . "</td>";
+                echo "<td>" . $row['dagforbokning'] . "</td>";
+           //     echo "<td>" . $row['bild'] . "</td>";
             echo "</tr>";
         }
         echo "</table>";
