@@ -51,19 +51,20 @@
 
 	<p>namn: <?php $_SESSION['userLoggedIn']?></p>
 
-
-
-</div>
-
-<?php 	include("includes/handlers/schema-handler.php"); ?>
-
-<input value="Logout" type="button" action="<?php
+	<input value="Logout" type="button" onclick="<?php
  session_destroy();
  
  
  ?>">
 
 </div>
+
+
+</div>
+
+<?php 	include("includes/handlers/schema-handler.php"); ?>
+
+
 
 
 
