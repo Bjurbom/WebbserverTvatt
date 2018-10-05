@@ -7,8 +7,6 @@
 	$myquery = mysqli_query($con,"SELECT * FROM users WHERE adress='$adress'");
     $query = $con->query("SELECT bild FROM users WHERE lagenhetsnummer = '$id'");
 	 
-	$row = mysqli_fetch_array($myquery);
-	$name = $row['adress'];
 	
 
 	if(!isset($_SESSION['userLoggedIn'])){
@@ -55,7 +53,7 @@
  session_destroy();
  
  
- ?>">
+ ?>" action="user.php" method="POST" name="logout" >
 
 </div>
 
