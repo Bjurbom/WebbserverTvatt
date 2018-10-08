@@ -3,7 +3,7 @@
 
 	$id = $_SESSION['userLoggedIn'];
 	
-	echo $_SESSION['userLoggedIn'];
+
 
 	
 
@@ -86,7 +86,7 @@ if($result = mysqli_query($con, $sql)){
     if(mysqli_num_rows($result) > 0){
         echo "<table>";
             echo "<tr>";
-                echo "<th>id</th>";
+                echo "<th>Ägare</th>";
                 echo "<th>TidFörbokning</th>";
                 echo "<th>dag</th>";
               //  echo "<th>email</th>";

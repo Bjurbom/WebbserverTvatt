@@ -25,4 +25,9 @@ if(mysqli_query($link, $sql)){
 // Close connection
 mysqli_close($link);
 
+
+
+
+header("Location: ../../user.php");
+
 ?>
