@@ -1,6 +1,6 @@
 <?php
 
-    $agare = $_SESSION['userLoggedIn'];
+
 
 
     $sql = "SELECT * FROM schemat";

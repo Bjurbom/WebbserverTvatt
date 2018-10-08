@@ -2,23 +2,16 @@
 	include("includes/config.php");
 
     $id = $_SESSION['userLoggedIn'];
-	$adress = "hejvägen 23";
 
-	$myquery = mysqli_query($con,"SELECT * FROM users WHERE adress='$adress'");
-    $query = $con->query("SELECT bild FROM users WHERE lagenhetsnummer = '$id'");
-	 
 	
 
 	if(!isset($_SESSION['userLoggedIn'])){
 		header("Location: index.php");
 	}
 
-	if(isset($_POST['logout'])){
-		echo "hello";
-	}
 
 	
-
+	echo $id;
 		
 	
 ?>
@@ -49,11 +42,7 @@
 
 	<p>namn: <?php $_SESSION['userLoggedIn']?></p>
 
-	<input value="Logout" type="button" onclick="<?php
- session_destroy();
- 
- 
- ?>" action="user.php" method="POST" name="logout" >
+	<input value="Logout" type="button" method="POST" name="logout" >
 
 </div>
 
