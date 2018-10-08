@@ -1,7 +1,9 @@
 <?php
 	include("includes/config.php");
 
-    $id = $_SESSION['userLoggedIn'];
+	$id = $_SESSION['userLoggedIn'];
+	
+	echo $_SESSION['userLoggedIn'];
 
 	
 
@@ -40,7 +42,7 @@
 
 
 
-	<p>namn: <?php $_SESSION['userLoggedIn']?></p>
+	<p>namn: <?php $id?></p>
 
 	<input value="Logout" type="button" method="POST" name="logout" >
 
