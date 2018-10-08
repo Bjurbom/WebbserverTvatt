@@ -72,6 +72,11 @@
 	<input type="submit">
 
 </form>
+
+<form action="includes/handlers/makeDate.php" method="POST">
+	<input type="submit" value="avboka">
+</form>
+
 </div>
 
 <div id="rightGroup">
