@@ -60,12 +60,12 @@
 
 	<p>
 		<label for="datum">Datum</label>
-		<input type="date" name="datum" id="firstname">
+		<input type="date" name="datum" id="firstname" required>
 	</p>
 
 	<p>
 		<label for="tid">Tid</label>
-		<input type="time" name="tid" id="firstname">
+		<input type="time" name="tid" id="firstname" required>
 	</p>
 
 
