@@ -11,7 +11,7 @@
 
 
 	
-	echo $id;
+	
 		
 	
 ?>
@@ -47,6 +47,32 @@
 </div>
 
 
+</div>
+<div id="leftGroup">
+</div>
+
+<div id="middleGroup">
+	<form action="includes/handlers/makeDate.php" method="POST">
+
+	<h2>Booka</h2>
+
+	<p>
+		<label for="datum">Datum</label>
+		<input type="date" name="datum" id="firstname">
+	</p>
+
+	<p>
+		<label for="tid">Tid</label>
+		<input type="time" name="tid" id="firstname">
+	</p>
+
+
+	<input type="submit">
+
+</form>
+</div>
+
+<div id="rightGroup">
 </div>
 
 <?php 	include("includes/handlers/schema-handler.php"); ?>
