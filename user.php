@@ -44,7 +44,10 @@
 
 	<p>namn: <?php $id?></p>
 
-	<input value="Logout" type="button" method="POST" name="logout" >
+    <form action="includes/handlers/log-out.php" method="POST">
+    <input type="submit" value="Logga ut">
+
+</form>
 
 </div>
 

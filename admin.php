@@ -6,8 +6,6 @@ if(!isset($_SESSION['userLoggedIn'])){
 }
 
 $adminId = $_SESSION['userLoggedIn'];
-echo($adminId);
-echo(gettype($adminId));
 
 if(!$adminId == "0"){
     header("Location: user.php");
@@ -40,7 +38,7 @@ if(!$adminId == "0"){
 
     <form action="includes/handlers/makeDate.php" method="POST">
 
-        <h2>Booka</h2>
+        <h2>lägg till användare</h2>
 
         <p>
         <label for="datum">Datum</label>
