@@ -34,20 +34,25 @@ if(!$adminId == "0"){
 <div class="header">
 </div>
 
-<div class="body">
+<div class="">
 
     <form action="includes/handlers/makeDate.php" method="POST">
 
         <h2>lägg till användare</h2>
 
         <p>
-        <label for="datum">Datum</label>
-        <input type="date" name="datum" id="firstname" required>
+        <label for="lagenhetnamn">Datum</label>
+        <input type="text" name="lagenhetnamn" id="lagenhetnamn" required>
         </p>
 
         <p>
-        <label for="tid">Tid</label>
-        <input type="time" name="tid" id="firstname" required>
+        <label for="password">Lössenord</label>
+        <input type="password" name="password" id="password" required>
+        </p>
+
+        <p>
+        <label for="namn">Datum</label>
+        <input type="text" name="namn" id="namn" required>
         </p>
 
 
