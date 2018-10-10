@@ -1,9 +1,15 @@
 <?php 
-if(isset($_SESSION['userLoggedIn'])){
+include("includes/config.php");
+
+if(!isset($_SESSION['userLoggedIn'])){
     header("Location: index.php");
 }
 
-if($_SESSION['userLoggedIn'] = "0"){
+$adminId = $_SESSION['userLoggedIn'];
+echo($adminId);
+echo(gettype($adminId));
+
+if(!$adminId == "0"){
     header("Location: user.php");
 }
 
@@ -31,6 +37,29 @@ if($_SESSION['userLoggedIn'] = "0"){
 </div>
 
 <div class="body">
+
+    <form action="includes/handlers/makeDate.php" method="POST">
+
+        <h2>Booka</h2>
+
+        <p>
+        <label for="datum">Datum</label>
+        <input type="date" name="datum" id="firstname" required>
+        </p>
+
+        <p>
+        <label for="tid">Tid</label>
+        <input type="time" name="tid" id="firstname" required>
+        </p>
+
+
+<input type="submit">
+
+</form>
+
+
+
+
 </div>
 
 <div class="rightContainer">
