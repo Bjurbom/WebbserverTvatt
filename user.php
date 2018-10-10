@@ -73,7 +73,7 @@
 
 </form>
 
-<form action="includes/handlers/makeDate.php" method="POST">
+<form action="includes/handlers/deletedDate.php" method="POST">
 	<input type="submit" value="avboka">
 </form>
 
