@@ -108,7 +108,7 @@ if($result = mysqli_query($con, $sql)){
         // Free result set
         mysqli_free_result($result);
     } else{
-        echo "No records matching your query were found.";
+        echo "Emty LOL XD .";
     }
 } else{
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
