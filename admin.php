@@ -1,3 +1,17 @@
+<?php 
+if(isset($_SESSION['userLoggedIn'])){
+    header("Location: index.php");
+}
+
+if($_SESSION['userLoggedIn'] = "0"){
+    header("Location: user.php");
+}
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
