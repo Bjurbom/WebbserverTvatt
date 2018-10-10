@@ -15,10 +15,12 @@ if($link === false){
 }
  
 
-$sqll = "SELECT * FROM schemat WHERE id='$agare'";  
+$sqll = "SELECT * FROM schemat WHERE agare='$agare'";  
 $result = $link->query($sqll);
 
-if($result){
+
+
+if($result->num_rows == 0){
         // Attempt insert query execution
         $sql = "INSERT INTO `schemat` (`id`, `agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL, '$agare', '$time', '$date');";
     if(mysqli_query($link, $sql)){
