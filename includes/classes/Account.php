@@ -36,19 +36,15 @@
         }
 
         //trying to register the user
-        public function register($un, $fn, $ln,$em ,$em2, $pw,$pw2){
+        public function register($ln,$n,$pw,$adress){
 
             //validating the users input
-           $this->validateUsername($un);
-           $this->validateFirstname($fn);
-           $this->validateLastname($ln);
-           $this->validateEmails($em, $em2);
-           $this->validatePasswords($pw, $pw2);
+
 
            //if errorArray is empty then insert into the database
            if(empty($this->errorArray)){
                //Insert into db
-               return $this->insertUserDetails($un,$fn,$ln,$em,$pw);
+               return $this->insertUserDetails($ln,$n,$pw,$adress);
            }
            else{
                //else it wasn't succesful
@@ -66,7 +62,7 @@
            // $date = date("Y-m-d");
 
             //inserting the data
-            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$ln','$encrypedPw','$n','$andress', '$profilePic')");
+            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$ln','$encrypedPw','$n','$adress', '$profilePic')");
             //returns true if it inserted correctly
             //otherwise it returns false
             return $result;

@@ -1,13 +1,13 @@
 <?php 
-    include("../config.php");
-    include("../classes/Constants.php");  
-    include("../classes/Account.php");
+    include("includes/config.php");
+    include("includes/classes/Constants.php");  
+    include("includes/classes/Account.php");
     
     //make a acount with the connection of the database
      $account = new Account($con);
      
     
-    include("../handlers/login-handler.php");
+    include("includes/handlers/register-handler.php");
 
 
 
@@ -46,7 +46,7 @@ if(!$adminId == "0"){
 
 <div class="">
 
-    <form action="../handlers/register-handler.php" method="POST">
+    <form action="admin.php" method="POST">
 
         <h2>lägg till användare</h2>
 

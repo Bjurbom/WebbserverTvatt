@@ -52,15 +52,17 @@ if(isset($_POST['registerButton'])){
 
     //sanitize every varibels before putting it in
     $lagenhetsnummer = sanitizeFormUsername($_POST['lagenhetnummer']);
-    
+    $namn = $_POST['namn'];
     $password = sanitizeFormPassword($_POST['password']);
     $adress = sanitizeFormString($_POST['adress']);
    
 
     //trying to register
-    
+    $wasSuccessful = $account->register($lagenhetsnummer,$namn,$password,$adress);
     
     //if succesfull the redirect to index.php and gives session the username of the user 
+echo($wasSuccessful);
+
     if($wasSuccessful){
         
         echo ("User was created");
