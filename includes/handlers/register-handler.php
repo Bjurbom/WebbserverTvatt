@@ -61,12 +61,14 @@ if(isset($_POST['registerButton'])){
     $wasSuccessful = $account->register($lagenhetsnummer,$namn,$password,$adress);
     
     //if succesfull the redirect to index.php and gives session the username of the user 
-echo($wasSuccessful);
+
 
     if($wasSuccessful){
         
         echo ("User was created");
         
+    }else{
+        echo("it didn't worked");
     }
 
 }

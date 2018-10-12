@@ -62,7 +62,7 @@
            // $date = date("Y-m-d");
 
             //inserting the data
-            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$ln','$encrypedPw','$n','$adress', '$profilePic')");
+            $result = mysqli_query($this->con, "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn`, `adress`, `bild`) VALUES (NULL, '$ln', '$encrypedPw', '$n', '$adress', NULL)");
             //returns true if it inserted correctly
             //otherwise it returns false
             return $result;
