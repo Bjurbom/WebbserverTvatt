@@ -56,17 +56,17 @@
            }
         }
 
-        private function insertUserDetails($un,$fn,$ln,$em,$pw){
+        private function insertUserDetails($ln,$n,$pw,$adress){
 
             //encrypt the user's password
             $encrypedPw = md5($pw); 
             //inserting a defualt profile pic
             $profilePic ="assets/images/profile-pics/profile-piicture1.jpg";
             //giving the current date
-            $date = date("Y-m-d");
+           // $date = date("Y-m-d");
 
             //inserting the data
-            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un','$fn','$ln','$em','$encrypedPw', '$date', '$profilePic')");
+            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$ln','$encrypedPw','$n','$andress', '$profilePic')");
             //returns true if it inserted correctly
             //otherwise it returns false
             return $result;

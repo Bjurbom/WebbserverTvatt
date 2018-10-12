@@ -1,5 +1,15 @@
 <?php 
-include("includes/config.php");
+    include("../config.php");
+    include("../classes/Constants.php");  
+    include("../classes/Account.php");
+    
+    //make a acount with the connection of the database
+     $account = new Account($con);
+     
+    
+    include("../handlers/login-handler.php");
+
+
 
 if(!isset($_SESSION['userLoggedIn'])){
     header("Location: index.php");
@@ -36,13 +46,13 @@ if(!$adminId == "0"){
 
 <div class="">
 
-    <form action="includes/handlers/makeDate.php" method="POST">
+    <form action="../handlers/register-handler.php" method="POST">
 
         <h2>lägg till användare</h2>
 
         <p>
-        <label for="lagenhetnamn">Datum</label>
-        <input type="text" name="lagenhetnamn" id="lagenhetnamn" required>
+        <label for="lagenhetnummer">lagenhetsnummer</label>
+        <input type="text" name="lagenhetnummer" id="lagenhetnummer" required>
         </p>
 
         <p>
@@ -51,12 +61,17 @@ if(!$adminId == "0"){
         </p>
 
         <p>
-        <label for="namn">Datum</label>
+        <label for="namn">Namn</label>
         <input type="text" name="namn" id="namn" required>
         </p>
 
+        <p>
+        <label for="adress">Adress</label>
+        <input type="text" name="adress" id="adress" required>
+        </p>
 
-<input type="submit">
+
+<button type="submit" name="registerButton">Lägg in användare</button>
 
 </form>
 
