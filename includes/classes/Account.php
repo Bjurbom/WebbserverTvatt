@@ -54,18 +54,27 @@
 
         private function insertUserDetails($ln,$n,$pw,$adress){
 
-            //encrypt the user's password
-            $encrypedPw = md5($pw); 
-            //inserting a defualt profile pic
-            $profilePic ="assets/images/profile-pics/profile-piicture1.jpg";
-            //giving the current date
-           // $date = date("Y-m-d");
+        $ecryptedPw = md5($pw);
+        
+        $link = mysqli_connect("localhost", "root", "", "tvattstugan");
+ 
+        // Check connection
+        if($link === false){
+            die("ERROR: Could not connect. " . mysqli_connect_error());
+        }
+ 
+        // Attempt insert query execution
+        $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn`, `adress`, `bild`) VALUES (NULL, '$ln', '$ecryptedPw', '$n', '$adress', NULL)";
+        if(mysqli_query($link, $sql)){
+            return true;
+            mysqli_close($link);
+        } else{
+            return  mysqli_error($link);
+            mysqli_close($link);
+        }
+ 
 
-            //inserting the data
-            $result = mysqli_query($this->con, "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn`, `adress`, `bild`) VALUES (NULL, '$ln', '$encrypedPw', '$n', '$adress', NULL)");
-            //returns true if it inserted correctly
-            //otherwise it returns false
-            return $result;
+            
         }
 
         //looking for a specific error

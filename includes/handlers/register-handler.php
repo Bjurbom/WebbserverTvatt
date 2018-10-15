@@ -56,20 +56,44 @@ if(isset($_POST['registerButton'])){
     $password = sanitizeFormPassword($_POST['password']);
     $adress = sanitizeFormString($_POST['adress']);
    
-
-    //trying to register
-    $wasSuccessful = $account->register($lagenhetsnummer,$namn,$password,$adress);
-    
-    //if succesfull the redirect to index.php and gives session the username of the user 
-
-
-    if($wasSuccessful){
-        
-        echo ("User was created");
-        
-    }else{
-        echo("it didn't worked");
+    $encryptedPassword = md5($password);
+    /* Attempt MySQL server connection. Assuming you are running MySQL
+    server with default setting (user 'root' with no password) */
+    $link = mysqli_connect("localhost", "root", "", "tvattstugan");
+     
+    // Check connection
+    if($link === false){
+        die("ERROR: Could not connect. " . mysqli_connect_error());
     }
+     
+    
+    $sqll = "SELECT * FROM users WHERE lagenhetsnummer='$lagenhetsnummer'";  
+    $result = $link->query($sqll);
+    
+    
+    
+    if($result->num_rows == 0){
+            // Attempt insert query execution
+            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , 'include/images/test.jpg');";
+        if(mysqli_query($link, $sql)){
+            echo "user added.";
+        } else{
+            echo "lol didn't work $sql. " . mysqli_error($link);
+        }
+     
+    }
+    
+    
+    
+    
+    
+    // Close connection
+    mysqli_close($link);
+    
+    
+    
+    
+    //header("Location: admin.php");
 
 }
 
