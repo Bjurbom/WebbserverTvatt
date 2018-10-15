@@ -75,7 +75,9 @@ if(!$adminId == "0"){
 
 </form>
 
-
+<form action="includes/handlers/log-out.php">
+<input type="submit" value="Logga ut">
+</form>
 
 
 </div>
