@@ -38,7 +38,7 @@
 <div id="profileInfo">
 	<h2>Profile</h2> <br>
 <?php 
-    $sql = "SELECT * FROM users WHERE id='$id'";
+    $sql = "SELECT * FROM users WHERE lagenhetsnummer='$id'";
     if($result = mysqli_query($con, $sql)){
     if(mysqli_num_rows($result) > 0){
 		 while($row = mysqli_fetch_array($result)){

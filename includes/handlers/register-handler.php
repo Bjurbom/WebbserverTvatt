@@ -74,7 +74,7 @@ if(isset($_POST['registerButton'])){
     
     if($result->num_rows == 0){
             // Attempt insert query execution
-            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , 'include/images/test.jpg');";
+            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , 'includes/images/test.jpg');";
         if(mysqli_query($link, $sql)){
             echo "user added.";
         } else{
