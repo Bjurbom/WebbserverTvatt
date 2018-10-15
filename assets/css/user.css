@@ -28,6 +28,14 @@ td{
     margin: 0px 30% 0px 30%;
 }
 
+img{
+	background-color: #fff;
 
+    border-radius: 2px;
+	
+    height: 160px;
+
+    width: 160px;
+}
 
  

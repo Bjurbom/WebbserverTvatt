@@ -37,13 +37,25 @@
 
 <div id="profileInfo">
 	<h2>Profile</h2> <br>
-
-	<img src="<?php $query ?>">
-
-
-
-	<p>namn: <?php $id?></p>
-
+<?php 
+    $sql = "SELECT * FROM users WHERE id='$id'";
+    if($result = mysqli_query($con, $sql)){
+    if(mysqli_num_rows($result) > 0){
+		 while($row = mysqli_fetch_array($result)){
+			 
+	echo "<img src=". $row['bild'] .">";
+	
+	echo "<p>namn:". $row['namn'] ."</p>";
+	
+		 }
+    mysqli_free_result($result);
+    } else{
+        echo "No Picture Is Found.";
+    }
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+?>
     <form action="includes/handlers/log-out.php" method="POST">
     <input type="submit" value="Logga ut">
 
