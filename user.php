@@ -99,11 +99,15 @@
 <?php
 
 
-
-
     $sql = "SELECT * FROM schemat";
 if($result = mysqli_query($con, $sql)){
     if(mysqli_num_rows($result) > 0){
+        $date = $row['dagforbokning'];
+        $dayOfTheWeek = date('l' , strtotime($date));
+        
+
+
+
         echo "<table>";
             echo "<tr>";
                 echo "<th>Ägare</th>";
@@ -115,7 +119,7 @@ if($result = mysqli_query($con, $sql)){
             echo "<tr>";
                 echo "<td>" . $row['agare'] . "</td>";
                 echo "<td>" . $row['tidForBokning'] . "</td>";
-                echo "<td>" . $row['dagforbokning'] . "</td>";
+                echo "<td>" . $dayOfTheWeek. " ".  $row['dagforbokning'].  "</td>";
            //     echo "<td>" . $row['bild'] . "</td>";
             echo "</tr>";
         }
