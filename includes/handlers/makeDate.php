@@ -21,6 +21,15 @@ $result = $link->query($sqll);
 
 
 if($result->num_rows == 0){
+
+        $dateNow = new DateTime("now");
+
+        if($dateNow < $date){
+            header("Location: ../../user.php");
+            die();
+        }
+
+
         // Attempt insert query execution
         $sql = "INSERT INTO `schemat` (`id`, `agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL, '$agare', '$time', '$date');";
     if(mysqli_query($link, $sql)){
