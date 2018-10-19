@@ -83,6 +83,20 @@ if(!$adminId == "0"){
 </div>
 
 <div class="rightContainer">
+
+<form action="includes/handlers/removeUser-handler.php" method="POST">
+
+<h2>Ta bort användare</h2>
+
+<p>
+<label for="lagenhetnummer">lägenhetsnummer</label>
+<input type="text" name="lagenhetnummer" id="lagenhetnummer" required>
+</p>
+
+
+<button type="submit" name="registerButton">Ta Bort användare</button>
+
+</form>
 </div>
 
     
