@@ -22,9 +22,9 @@ $result = $link->query($sqll);
 
 if($result->num_rows == 0){
 
-        $dateNow = new DateTime("now");
+        
 
-        if($dateNow < $date){
+        if(date("Y-m-d") >$date){
             header("Location: ../../user.php");
             die();
         }
