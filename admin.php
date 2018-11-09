@@ -94,9 +94,19 @@ if(!$adminId == "0"){
 </p>
 
 
+
+
+
 <button type="submit" name="registerButton">Ta Bort användare</button>
 
 </form>
+
+<form action="includes/handlers/upload-file.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
 </div>
 
     
