@@ -29,14 +29,31 @@ td{
 }
 
 #rightGroup {
-	text-align: center;
-    background-color: #979797;
-    height: 60px;
-    width: 20%;
-    margin: 0px 30% 20px 40%;
-    padding: 0.5px;
+	columns: 3;
+	margin: 0px 8% 20px 20%;
+	position: center;
+	padding: 0px 100px;
+}
+#veckblock{
+	text-align: center; 
+     background-color: #979797; 
+     height: 40px;  
+     width: 40%;   
+	 /* padding: 10px 10px; */
 }
 
+#veckatext{
+	
+	padding: 10px 10px;
+}
+
+button {
+	
+	width: 30%;
+	height: 40px;
+	
+	
+}
 
 img{
 	background-color: #fff;
