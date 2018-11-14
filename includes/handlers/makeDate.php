@@ -17,6 +17,7 @@ if($link === false){
 }
 
 
+
 $sqll = "SELECT * FROM schemat WHERE agare='$agare'";  
 $result = $link->query($sqll);
 
@@ -28,26 +29,41 @@ if($result->num_rows == 0){
 
         if(date("Y-m-d") >$date){
        //     header("Location: ../../user.php");
+            echo("die");
             die();
         }
 
-        $seeIfSomethingIsThere = "SELECT * FROM schemat WHERE dagforbokning='$date'";
+        $seeIfSomethingIsThere = "SELECT * FROM schemat WHERE dagforbokning='$date' AND tidForBokning='$time'";
 
         $result = $link->query($seeIfSomethingIsThere);
 
+        if($result->num_rows == 1){
+            //same date and time
+            echo("same date and time");
+        }else{
+            $sql = "INSERT INTO `schemat` (`id`, `agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL, '$agare', '$time', '$date');";
+            if(mysqli_query($link, $sql)){
+                echo "Records inserted successfully.";
+            } else{
+                echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+            }
+        }
+
+
+        /*
         if($result->num_rows == 1){
            
 
             header("Location: ../../user.php");
             echo("same day ");
-            $seeIfTimeIsSame = "SELECT * FROM schemat WHERE tidForBokning='$time'";
+            $seeIfTimeIsSame = "SELECT * FROM schemat WHERE tidForBokning='$time' AND dagforbokning='$date'";
             $result = $link->query($seeIfTimeIsSame);
             
             if($result->num_rows == 1){
                 
                 header("Location: ../../user.php");
                 echo("same time ");
-                die();
+               // die();
             }else{
                 $sql = "INSERT INTO `schemat` (`id`, `agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL, '$agare', '$time', '$date');";
                 if(mysqli_query($link, $sql)){
@@ -63,7 +79,7 @@ if($result->num_rows == 0){
             } else{
                 echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
             }
-        }
+        }*/
 
  
 }
