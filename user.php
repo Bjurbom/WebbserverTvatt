@@ -1,12 +1,13 @@
 <?php
 	include("includes/config.php");
+	include("includes/functions/usersFunktions.php");
 	$id = $_SESSION['userLoggedIn'];
 	
 
     
 	$bookningsidlista = array();	
 	$datum = date("Y/m/d");
-	$selectedDate = $datum;
+	$week = datumTillVecka($datum);
 	
 	
 	if(!isset($_SESSION['userLoggedIn'])){
@@ -14,97 +15,6 @@
 	}
 
 	$_SESSION['agare'] = $_SESSION['userLoggedIn'];
-	
-	function datumCheck($week,$dagnummer){ //tar in vilken vecka det är och översätter det till måndag tisdagg... beroende på $dagnummer i veckan
-	return date( " M d", strtotime("2018"."W".$week."$dagnummer") ); // First day of week
-
-	}
-	
-	function accurateDatumCheck($week,$dagnummer){ //tar in vilken vecka det är och översätter det till måndag tisdagg... beroende på $dagnummer i veckan
-	//ska vara med år för att kunna checka det med databasen.
-	return date( "Y/m/d", strtotime("2018"."W".$week."$dagnummer") ); // First day of week
-	}
-	
-	function TilläggDatum($tempdatum, $tillägg) {
-	//en funktion för att lägga till datum.	
-    $start_date = $tempdatum;  
-	$date = strtotime($start_date);
-	$date = strtotime("$tillägg day", $date);
-	$sumdate = date('Y/m/d', $date);
-		return $sumdate;
-	}
-	
-	function ReduceraDatum($tempdatum, $tillägg) {
-	//en funktion för att minska datum.		
-    $start_date = $tempdatum;  
-	$date = strtotime($start_date);
-	$date = strtotime("$tillägg day", $date);
-	$sumdate = date('Y/m/d', $date);
-		return $sumdate;
-	}
-	
-	function checkabokning($tempdatum,$idlista,$temptime,$con) {
-		
-	    $tempbokad = 0;
-		$sql = "SELECT * FROM schemat";
-    if($result = mysqli_query($con, $sql)){
-    if(mysqli_num_rows($result) > 0){
-		 while($row = mysqli_fetch_array($result)){
-				
-			if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum) {
-			 $tempbokad = 1;
-			 }
-			
-		 }
-    mysqli_free_result($result);
-    } else{
-        echo "No";
-    }
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-      }	
-	  
-	  if($tempbokad == 1) {
-				 
-			    echo "Bokad";
-			 }
-			 else{
-			    echo "Ej Bookad";
-		     }	
-	  
-	}
-	
-	 
-	
-	function checkabokningcolor($tempdatum,$idlista,$temptime,$con) {
-		
-		$tempbokad = 0;
-		$sql = "SELECT * FROM schemat";
-    if($result = mysqli_query($con, $sql)){
-    if(mysqli_num_rows($result) > 0){
-		 while($row = mysqli_fetch_array($result)){
-			 
-			 if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum) {
-			 $tempbokad = 1;
-			 }
-			 
-		 }
-    mysqli_free_result($result);
-    } else{
-        echo "No";
-    }
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-}
-
-		if($tempbokad == 1){
-			echo "#e92121";
-		}
-		else{
-			echo "#b7e500";
-		}	
-	}
-		
 	
 ?>
 <!DOCTYPE html>
@@ -117,8 +27,9 @@
 
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/user.css"> 
-	<script src="assets/js/byttVecka.js"></script>
+	<link rel="stylesheet" href="assets/css/user.css">
+	<script src="assets/js/jquery-3.0.0.min.js"></script>	
+	<script src="assets/js/byttVecka.js"></script>	
 
 </head>
 <body>
@@ -137,6 +48,7 @@
 	echo "<img src=". $row['bild'] .">";
 	
 	echo "<p>namn:". $row['namn'] ."</p>";
+	
 	
 		 }
     mysqli_free_result($result);
@@ -187,23 +99,21 @@
 <br>
 
 <div id="rightGroup">
-<button type="button" id="fVecka" onclick="<?php $selectedDate = TilläggDatum(datum, 7);?>">Föregående Vecka</button>
+<button type="button" id="fVecka" onclick="<?php //$week = datumTillVecka(TilläggDatum(datum, 7));?>">Föregående Vecka</button>
 <div id="veckblock">
 <h3 id="veckatext">Vecka: 
 <?php
 //översätter datum till vecka.
-$ddate = $datum;
-$date = new DateTime($ddate);
-$week = $date->format("W");
-echo "$week ";
+echo datumTillVecka($datum);
+//$week = datumTillVecka($datum);
 
 ?>
 </div>
 </h3>
-<button type="button" id="nVecka" onclick="<?php $selectedDate = ReduceraDatum(datum, 7); ?>">Nästa Vecka</button> 
+<button type="button" id="nVecka" onclick="<?php //$week = datumTillVecka(ReduceraDatum(datum, 7)); ?>">Nästa Vecka</button> 
  
 </div>
- <div class="row" id="schema">
+ <div class="row" id="schema2">	
  
   <div class="column">
   
@@ -248,7 +158,7 @@ echo "$week ";
 		</div>	
 	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
 	//och ger den röd om det är samma och grön om det inte är det
-	checkabokningcolor($selectedDate,$bookningsidlista,"16:00:00.000000",$con)
+	checkabokningcolor(accurateDatumCheck($week,"1"),$bookningsidlista,"16:00:00.000000",$con)
 	?>">
 	<p style="padding: 2.5vh;">16:00 - 18:00</p>
 	<?php
@@ -275,7 +185,7 @@ echo "$week ";
 		</div>	
 	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
 	//och ger den röd om det är samma och grön om det inte är det
-	checkabokningcolor($selectedDate,$bookningsidlista,"22:00:00.000000",$con)
+	checkabokningcolor(accurateDatumCheck($week,"1"),$bookningsidlista,"22:00:00.000000",$con)
 	?>">
 	<p style="padding: 2.5vh;">22:00 - 24:00</p>
 	<?php
@@ -288,31 +198,469 @@ echo "$week ";
   <div class="column">
     <div class="card">
 	<p>Tisdag <?php echo datumCheck($week,"2"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"1"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"2"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
   <div class="column">
     <div class="card">
 	<p>Onsdag <?php echo datumCheck($week,"3"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"3"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"3"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
   <div class="column">
     <div class="card">
 	<p>Torsdag <?php echo datumCheck($week,"4"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"4"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"4"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
   <div class="column">
     <div class="card">
 	<p>Fredag <?php echo datumCheck($week,"5"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"5"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"5"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
   <div class="column">
     <div class="card">
 	<p>Lördag <?php echo datumCheck($week,"6"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"6"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"6"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
   <div class="column">
     <div class="card">
 	<p>Söndag <?php echo datumCheck($week,"7"); ?></p>
+	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"08:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">8:00 - 10:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"08:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"10:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">10:00 - 12:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"10:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"12:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">12:00 - 14:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"12:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"14:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">14:00 - 16:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"14:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"16:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">16:00 - 18:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"16:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"18:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">18:00 - 20:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"18:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"20:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">20:00 - 22:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"20:00:00.000000",$con);
+	?>
+		</div>	
+	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
+	//och ger den röd om det är samma och grön om det inte är det
+	checkabokningcolor(accurateDatumCheck($week,"7"),$bookningsidlista,"22:00:00.000000",$con)
+	?>">
+	<p style="padding: 2.5vh;">22:00 - 24:00</p>
+	<?php
+	checkabokning(accurateDatumCheck($week,"7"),$bookningsidlista,"22:00:00.000000",$con);
+	?>
+		</div>	
 	</div>
   </div>
 </div>  
