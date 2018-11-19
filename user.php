@@ -3,13 +3,17 @@
 	include("includes/functions/usersFunktions.php");
 	$id = $_SESSION['userLoggedIn'];
 	
-
-    
+    if(isset($_POST['intesnopp'])){
+		$week = $_POST['week'];
+		$week += 1;
+	}
+	
 	$bookningsidlista = array();	
 	$datum = date("Y/m/d");
+	if(!isset($week)){
 	$week = datumTillVecka($datum);
-	
-	
+	}
+
 	if(!isset($_SESSION['userLoggedIn'])){
 		header("Location: index.php");
 	}
@@ -28,8 +32,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/user.css">
-	<script src="assets/js/jquery-3.0.0.min.js"></script>	
-	<script src="assets/js/byttVecka.js"></script>	
+	
 
 </head>
 <body>
@@ -99,19 +102,25 @@
 <br>
 
 <div id="rightGroup">
-<button type="button" id="fVecka" onclick="<?php //$week = datumTillVecka(TilläggDatum(datum, 7));?>">Föregående Vecka</button>
+<button type="button" id="fVecka" onclick="<?php //$week += 1;?>">Föregående Vecka</button>
 <div id="veckblock">
 <h3 id="veckatext">Vecka: 
 <?php
-//översätter datum till vecka.
-echo datumTillVecka($datum);
-//$week = datumTillVecka($datum);
+
+echo $week;
+
 
 ?>
 </div>
 </h3>
-<button type="button" id="nVecka" onclick="<?php //$week = datumTillVecka(ReduceraDatum(datum, 7)); ?>">Nästa Vecka</button> 
- 
+
+<form action="user.php" method="post">
+
+<input name="intesnopp" type="submit" value="<?php  ?>">
+
+<input name="week" type="hidden" value='<?php echo "$week"?>'>
+</form>
+
 </div>
  <div class="row" id="schema2">	
  
@@ -210,7 +219,7 @@ echo datumTillVecka($datum);
 		</div>	
 	<div class="box" style="background-color:<?php //checkar om en bokning stämmer överens med just den här tiden 
 	//och ger den röd om det är samma och grön om det inte är det
-	checkabokningcolor(accurateDatumCheck($week,"1"),$bookningsidlista,"10:00:00.000000",$con)
+	checkabokningcolor(accurateDatumCheck($week,"2"),$bookningsidlista,"10:00:00.000000",$con)
 	?>">
 	<p style="padding: 2.5vh;">10:00 - 12:00</p>
 	<?php
