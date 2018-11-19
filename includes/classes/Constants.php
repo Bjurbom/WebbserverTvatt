@@ -18,6 +18,7 @@ class Constants {
     public static $dateWrong = "Ditt datum har redan passerat";
     public static $alreadyTaken = "Ditt tid är tagen";
     public static $dateForward = "Din tid är förlångt fram";
+    
 
 
 }

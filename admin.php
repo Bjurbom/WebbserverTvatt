@@ -44,30 +44,30 @@ if(!$adminId == "0"){
 <div class="header">
 </div>
 
-<div class="">
+<div id="box">
 
     <form action="admin.php" method="POST">
 
         <h2>lägg till användare</h2>
 
         <p>
-        <label for="lagenhetnummer">lagenhetsnummer</label>
-        <input type="text" name="lagenhetnummer" id="lagenhetnummer" required>
+        <label for="lagenhetnummer">Lägenhetsnummer</label>
+        <input type="text" name="lagenhetnummer" class="inputBox" required>
         </p>
 
         <p>
         <label for="password">Lössenord</label>
-        <input type="password" name="password" id="password" required>
+        <input type="password" name="password" class="inputBox" required>
         </p>
 
         <p>
         <label for="namn">Namn</label>
-        <input type="text" name="namn" id="namn" required>
+        <input type="text" name="namn" class="inputBox" required>
         </p>
 
         <p>
         <label for="adress">Adress</label>
-        <input type="text" name="adress" id="adress" required>
+        <input type="text" name="adress" class="inputBox" required>
         </p>
 
 
@@ -75,14 +75,11 @@ if(!$adminId == "0"){
 
 </form>
 
-<form action="includes/handlers/log-out.php">
-<input type="submit" value="Logga ut">
-</form>
 
 
-</div>
 
-<div class="rightContainer">
+
+
 
 <form action="includes/handlers/removeUser-handler.php" method="POST">
 
@@ -90,7 +87,7 @@ if(!$adminId == "0"){
 
 <p>
 <label for="lagenhetnummer">lägenhetsnummer</label>
-<input type="text" name="lagenhetnummer" id="lagenhetnummer" required>
+<input type="text" name="lagenhetnummer" class="inputBox" required>
 </p>
 
 
@@ -106,6 +103,11 @@ if(!$adminId == "0"){
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit">
 </form>
+
+<form action="includes/handlers/log-out.php">
+<input type="submit" value="Logga ut">
+</form>
+
 
 </div>
 

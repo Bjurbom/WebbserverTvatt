@@ -1,9 +1,60 @@
-html, body{
+html, body {
 
-    padding: 0;
-    margin: 0;
-    height: 100%;
+    background-image: url("https://c.pxhere.com/photos/ab/2c/sunset_sky_lake_nature_sun_landscape_sunrise_summer-1324838.jpg!d");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover !important;
+}
 
+div {
+    display: block;
+}
+
+form{
+    padding: 20px 20px 20px 20px;
+}
+.inputBox {
+    display: block;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #574A50;
+    height: 27px;
+    line-height: 27px;
+    width: 100%;
+}
+h2 {
+    text-align:center;
+}
+
+#box{
+    background-color: #999382a1;
+    width: 800px;
+    border: 15px solid #e8dffa;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 2% 25% 2% 25%;
+    align: center;
+
+    color: #080708;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: normal;
+    line-height: 1em;
+    box-sizing: border-box;
+}
+
+button{
+        background-color: transparent;
+        border: 2px solid #574A50;
+        border-radius: 200px;
+        color: #fff;
+        display: block;
+        font-size: 14px;
+        letter-spacing: 1px;
+        margin: 20px auto;
+        width: 100%;
+        height: 41px;
 }
 
     
