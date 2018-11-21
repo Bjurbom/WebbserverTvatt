@@ -46,7 +46,7 @@ if(!$adminId == "0"){
 
 <div id="box">
 
-    <form action="admin.php" method="POST">
+    <form action="admin.php" method="POST" enctype="multipart/form-data">
 
         <h2>lägg till användare</h2>
 
@@ -70,6 +70,11 @@ if(!$adminId == "0"){
         <input type="text" name="adress" class="inputBox" required>
         </p>
 
+        <p>
+        <label for="file"> Välj bild </label>
+        <input type="file" name="fileToUpload" id="fileToUpload">
+
+        </p>
 
 <button type="submit" name="registerButton">Lägg in användare</button>
 
@@ -100,7 +105,7 @@ if(!$adminId == "0"){
 
 <form action="includes/handlers/upload-file.php" method="post" enctype="multipart/form-data">
     Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+    
     <input type="submit" value="Upload Image" name="submit">
 </form>
 

@@ -55,6 +55,8 @@ if(isset($_POST['registerButton'])){
     $namn = $_POST['namn'];
     $password = sanitizeFormPassword($_POST['password']);
     $adress = sanitizeFormString($_POST['adress']);
+    include('upload-file.php');
+    
    
     $encryptedPassword = md5($password);
     /* Attempt MySQL server connection. Assuming you are running MySQL
@@ -74,7 +76,7 @@ if(isset($_POST['registerButton'])){
     
     if($result->num_rows == 0){
             // Attempt insert query execution
-            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , 'includes/images/test.jpg');";
+            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , '$target_file');";
         if(mysqli_query($link, $sql)){
             echo "user added.";
         } else{
