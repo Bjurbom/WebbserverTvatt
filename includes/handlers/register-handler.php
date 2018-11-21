@@ -68,7 +68,7 @@ if(isset($_POST['registerButton'])){
         die("ERROR: Could not connect. " . mysqli_connect_error());
     }
      
-    
+    //looking if there is already a user with that lägenhetsnummer
     $sqll = "SELECT * FROM users WHERE lagenhetsnummer='$lagenhetsnummer'";  
     $result = $link->query($sqll);
     
