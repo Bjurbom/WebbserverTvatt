@@ -30,8 +30,6 @@
     <!-- loads in the css-->
     <link rel="stylesheet" type="text/css" href="assets/css/register.css">
 
-    <!-- Credit for the icon goes to smalllikeart-->
-    <link rel="icon" href="assets/images/icons/washing-machine.png">
 
     <!-- loads jquary -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
