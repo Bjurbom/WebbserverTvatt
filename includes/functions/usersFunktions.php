@@ -40,7 +40,7 @@
 		return $sumdate;
 	}
 	
-	function checkabokning($tempdatum,$idlista,$temptime,$con) {
+	function checkabokning($tempdatum,$id,$temptime,$con) {
 		
 	    $tempbokad = 0;
 		$sql = "SELECT * FROM schemat";
@@ -51,7 +51,9 @@
 			if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum) {
 			 $tempbokad = 1;
 			 }
-			
+			if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum && $row['agare'] == $id) {
+			 $tempbokad = 2;
+			 }
 		 }
     mysqli_free_result($result);
     } else{
@@ -61,19 +63,22 @@
     echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
       }	
 	  
-	  if($tempbokad == 1) {
+		if($tempbokad == 1) {
 				 
-			    echo "Bokad";
-			 }
-			 else{
-			    echo "Ej Bookad";
-		     }	
+			echo "Bokad";
+		}
+		else if($tempbokad == 2){
+			echo "Bokad av dig";	 
+		}
+		else{
+			echo "Ej Bookad";
+		}	
 	  
 	}
 	
 	 
 	
-	function checkabokningcolor($tempdatum,$idlista,$temptime,$con) {
+	function checkabokningcolor($tempdatum,$id,$temptime,$con) {
 		
 		$tempbokad = 0;
 		$sql = "SELECT * FROM schemat";
@@ -83,6 +88,9 @@
 			 
 			 if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum) {
 			 $tempbokad = 1;
+			 }
+			 if($row['tidForBokning'] == $temptime && $row['dagforbokning'] == $tempdatum && $row['agare'] == $id) {
+			 $tempbokad = 2;
 			 }
 			 
 		 }
@@ -96,6 +104,9 @@
 
 		if($tempbokad == 1){
 			echo "#e92121";
+		}
+		else if($tempbokad == 2){
+			echo "#FFFF00";
 		}
 		else{
 			echo "#b7e500";

@@ -67,9 +67,8 @@
 
 </head>
 <body>
-<div class="header">
-
 <h1>Schema upplägg</h1>
+<div class="header">
 
 <div id="profileInfo">
 	<h2>Profile</h2> <br>
@@ -102,9 +101,7 @@
 </div>
 
 
-</div>
-<div id="leftGroup">
-</div>
+
 
 <div id="middleGroup">
 	<form action="includes/handlers/makeDate.php" method="POST">
@@ -131,12 +128,13 @@
 </form>
 
 </div>
+</div>
 <br>
 
 <div id="rightGroup">
 <form action="user.php" method="post">
 
-<input name="reduceraVecka" type="submit" value="Föregånde Vecka">
+<input id="vänsterVeckButton" name="reduceraVecka" type="submit" value="Föregånde Vecka">
 
 <input name="datum" type="hidden" value='<?php echo "$datum"?>'>
 </form>
@@ -153,7 +151,7 @@ echo $week;
 
 <form action="user.php" method="post">
 
-<input name="läggTillVecka" type="submit" value="Nästa Vecka">
+<input id="högerveckButton" name="läggTillVecka" type="submit" value="Nästa Vecka">
 
 <input name="datum" type="hidden" value='<?php echo "$datum"?>'>
 
