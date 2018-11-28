@@ -63,7 +63,7 @@ mysqli_free_result($result);
 
 <h1>Ändra Datan</h1>
 
-<form action="/includes/handlers/dataChange.php">
+<form action="includes/handlers/dataChange.php" method="POST">
 <p>
 <label>Lägenhetsnummer</label>
 <input type="text" name="laganhetsnummer" class="inputBox" required value="<?php echo $ln ?>">
@@ -71,7 +71,7 @@ mysqli_free_result($result);
 
 <p>
 <label>Nytt lösenord</label>
-<input type="text" name="pw" class="inputBox" value="">
+<input type="text" name="password" class="inputBox" value="">
 </p>
 <p>
 <label>Namn</label>
@@ -79,7 +79,7 @@ mysqli_free_result($result);
 </p>
 <p>
 <label>Adress</label>
-<input type="text" name="namn" class="inputBox" required value="<?php echo $adress ?>">
+<input type="text" name="adress" class="inputBox" required value="<?php echo $adress ?>">
 </p>
 
 <button type="submit">Ändra</button>

@@ -55,7 +55,9 @@ if(isset($_POST['registerButton'])){
     $namn = $_POST['namn'];
     $password = sanitizeFormPassword($_POST['password']);
     $adress = sanitizeFormString($_POST['adress']);
-    include('upload-file.php');
+   
+
+
     
    
     $encryptedPassword = md5($password);
@@ -76,6 +78,7 @@ if(isset($_POST['registerButton'])){
     
     if($result->num_rows == 0){
             // Attempt insert query execution
+            include('upload-file.php');
             $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , '$target_file');";
         if(mysqli_query($link, $sql)){
             echo "user added.";
@@ -83,6 +86,8 @@ if(isset($_POST['registerButton'])){
             echo "lol didn't work $sql. " . mysqli_error($link);
         }
      
+    }else{
+        $_SESSION['alreadyUser'] = $ln;
     }
     
     
