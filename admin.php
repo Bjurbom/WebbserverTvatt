@@ -103,12 +103,6 @@ if(!$adminId == "0"){
 
 </form>
 
-<form action="ChangeData.php" method="POST">
-<h2>Ändra Data</h2>
-<label for="lagenhetnummer">Lägenhetsnummer</label>
-<input type="text" name="lagenhetnummer" class="inputBox" required>
-<button type="submit">Sök</button>
-</form>
 
 <p>
 <form action="includes/handlers/log-out.php">

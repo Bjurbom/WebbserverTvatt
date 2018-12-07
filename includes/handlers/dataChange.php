@@ -3,48 +3,36 @@ include("../config.php");
 
 
 
-class dataChange
-{
-    private $link;
 
-    public function __construct(){
-        
-
-        //trying to connect
-        $link = mysqli_connect("localhost", "root", "", "tvattstugan");
- 
-        // Check connection
-        if($link === false){
-            die("ERROR: Could not connect. " . mysqli_connect_error());
-        }
-
-    }
-
-    public function ChangeData($ln,$pw,$adress,$namn){
-        if ($pw == null){
-            
-        }
-    }
-
-}
-
-
-
-
+$lnOriginal = $_SESSION['ln'];
 
 $ln = $_POST['laganhetsnummer'];
 $pw = $_POST['password'];
 $namn = $_POST['namn'];
 $adress = $_POST['adress'];
 
-    /* Attempt MySQL server connection. Assuming you are running MySQL
-    server with default setting (user 'root' with no password) */
-$link = mysqli_connect("localhost", "root", "", "tvattstugan");
-     
-    // Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
+
+$sqlquery = " SELECT * FROM users WHERE lagenhetsnummer='$ln'";
+
+$result = mysqli_query($con,$sqlquery);
+
+if($result->num_rows == 0){
+
+    if($pw == null){
+
+        $sqlquery = " UPDATE users  SET lagenhetsnummer='$ln' AND namn='$namn' AND adress='$adress' WHERE lagenhetsnummer='$lnOriginal'";
+
+        $result = mysqli_query($con,$sqlquery);
+
+        echo ($result);
+
+    }
+
+}else{
+    echo("Id is already in use");
+    die();
 }
+
 
 
 

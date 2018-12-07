@@ -37,12 +37,15 @@ if(mysqli_num_rows($result) > 0){
         $adress = $row['adress'];
         $bild = $row['bild'];
 
-       
+   
     }
 mysqli_free_result($result);
 } else{
    echo "No";
 }
+
+
+$_SESSION['ln']= $ln;
 
 ?>
 
