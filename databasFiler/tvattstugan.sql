@@ -43,7 +43,6 @@ CREATE TABLE `schemat` (
 CREATE TABLE `users` (
   `lagenhetsnummer` int(3) UNSIGNED NOT NULL,
   `losenord` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
-  `bokning` time(6) NOT NULL,
   `namn` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
   `adress` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `bild` varchar(500) COLLATE utf8_swedish_ci NOT NULL
@@ -53,9 +52,9 @@ CREATE TABLE `users` (
 -- Dumpning av Data i tabell `users`
 --
 
-INSERT INTO `users` (`lagenhetsnummer`, `losenord`, `bokning`, `namn`, `adress`, `bild`) VALUES
-(0, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', '0', 'hejvägen 123', ''),
-(1, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', '0', 'hejvägen 123', '');
+INSERT INTO `users` (`lagenhetsnummer`, `losenord`, `namn`, `adress`, `bild`) VALUES
+(0, '828fd9255753432d51df95eb62d61722', '0', 'hejvägen 123', ''),
+(1, '828fd9255753432d51df95eb62d61722','0', 'hejvägen 123', '');
 
 --
 -- Index för dumpade tabeller

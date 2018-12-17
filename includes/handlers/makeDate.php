@@ -50,7 +50,7 @@ if($result->num_rows == 0){
 
             //look if the date is one month ahead
             if($date < $effectiveDate){
-
+                
                 //inserting
                 $sql = "INSERT INTO `schemat` (`id`, `agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL, '$agare', '$time', '$date');";
                 if(mysqli_query($link, $sql)){

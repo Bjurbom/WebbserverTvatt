@@ -38,7 +38,7 @@
         //trying to register the user
         public function register($ln,$n,$pw,$adress){
 
-            //validating the users input
+            
 
 
            //if errorArray is empty then insert into the database
@@ -90,71 +90,9 @@
 
         //validate functions
         //seeing if it following the criteria
-        private function validateUsername($username) {
+
         
-            if(strlen($username) > 25 || strlen($username) < 5){
-                array_push($this->errorArray,  Constants::$usernameCharacters);
-                return;
-            }
 
-            $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$username'");
-            if(mysqli_num_rows($checkUsernameQuery) != 0){
-                array_push($this->errorArray, Constants::$usernameTaken);
-                return;
-            }
-
-        }
-        
-        private function validateFirstname($firstName) {
-            if(strlen($firstName) > 25 || strlen($firstName) < 2){
-                array_push($this->errorArray, Constants::$firstNameCharacters);
-                return;
-            }
-        }
-        
-        private function validateLastname($lastName) {
-            if(strlen($lastName) > 25 || strlen($lastName) < 2){
-                array_push($this->errorArray, Constants::$lastNameCharacters);
-                return;
-            }
-        }
-        
-        private function validateEmails($email, $email2) {
-            if($email != $email2){
-                array_push($this->errorArray, Constants::$emailsDoNotMatch);
-                return;
-            }
-
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                array_push($this->errorArray, Constants::$emailInvalid);
-                return;
-            }
-
-            $checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$email'");
-            if(mysqli_num_rows($checkEmailQuery) != 0){
-                array_push($this->errorArray, Constants::$emailTaken);
-                return;
-            }
-        }
-        
-        private function validatePasswords($password, $password2) {
-            
-            if($password != $password2){  
-                array_push($this->errorArray, Constants::$passwordsDoNoMatch);
-                return;
-            
-            }
-
-            if(preg_match('/[^A-Za-z0-9]/', $password)){
-                array_push($this->errorArray, Constants::$passwordNotAlphanumeric);
-                return;
-            }
-
-            if(strlen($password) > 30 || strlen($password) < 5){
-                array_push($this->errorArray, Constants::$passwordCharacters);
-                return;
-            }
-        }
 
     }
 
