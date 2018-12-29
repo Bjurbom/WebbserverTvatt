@@ -13,17 +13,11 @@ try{
     die("ERROR: Could not connect. " . $e->getMessage());
 }
 
-$sqll = "SELECT * FROM schemat WHERE agare='$agare'";  
-$result = $pdo->query($sqll);
-if($result->num_rows == 0){
+//gör en sql request
+$sql = "DELETE FROM schemat WHERE agare='$agare'";  
 
-
-
-}else {
-$sql2 = "DELETE FROM schemat WHERE agare='$ln'";  
-$pdo->query($sql2); 
-//this doesn't even give a error .... Weird
-}
+//query den med connection
+$pdo->query($sql);
 
 //tillbacka till the user.php
 header("location: ../../user.php");

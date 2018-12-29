@@ -32,7 +32,7 @@ if($result->num_rows == 0){
 
             echo ("die todays date");
             
-            header("Location: ../../user.php");
+            //header("Location: ../../user.php");
             die();
         }
         //see if somethings is inside with the same date and time
@@ -41,8 +41,8 @@ if($result->num_rows == 0){
 
         //if result is 1 then nothing happens
         if($result->num_rows == 1){
-            
-            header("Location: ../../user.php");
+            echo("XD");
+          //  header("Location: ../../user.php");
             //same date and time
             die();
         }else{
@@ -56,7 +56,7 @@ if($result->num_rows == 0){
             if($date < $effectiveDate){
 
                 //inserting
-                $sql = "INSERT INTO `schemat` (`agare`, `tidForBokning`, `dagforbokning`) VALUES ('$agare', '$time', '$date');";
+                $sql = "INSERT INTO `schemat` (`id`,`agare`, `tidForBokning`, `dagforbokning`) VALUES (NULL,'$agare', '$time', '$date');";
                 if(mysqli_query($link, $sql)){
                     echo "Records inserted successfully.";
                 } else{
@@ -64,7 +64,7 @@ if($result->num_rows == 0){
                 }
             }else{
                 echo("to long into the future");
-                header("Location: ../../user.php");
+               // header("Location: ../../user.php");
                 die();
             }
             //2018-11-16  ->   2018-12-16
