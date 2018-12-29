@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 01 okt 2018 kl 10:14
+-- Tid vid skapande: 03 okt 2018 kl 15:55
 -- Serverversion: 10.1.31-MariaDB
 -- PHP-version: 7.2.3
 
@@ -18,24 +18,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE tvattstugan;
-
 --
 -- Databas: `tvattstugan`
 --
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `schemat`
---
-
-CREATE TABLE `schemat` (
-  'id' int(10) NOT NULL AUTO_INCREMENT,
-  `agare` int(3) UNSIGNED NOT NULL,
-  `tidForBokning` time(6) NOT NULL,
-  `dagforbokning` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +29,8 @@ CREATE TABLE `schemat` (
 --
 
 CREATE TABLE `users` (
-  `lagenhetsnummer` int(3) UNSIGNED NOT NULL,
+  `id` int(3) UNSIGNED NOT NULL,
+  `lagenhetsnummer` int(3) NOT NULL,
   `losenord` varchar(100) COLLATE utf8_swedish_ci NOT NULL,
   `bokning` time(6) NOT NULL,
   `namn` varchar(150) COLLATE utf8_swedish_ci NOT NULL,
@@ -56,9 +42,9 @@ CREATE TABLE `users` (
 -- Dumpning av Data i tabell `users`
 --
 
-INSERT INTO `users` (`lagenhetsnummer`, `losenord`, `bokning`, `namn`, `adress`, `bild`) VALUES
-(0, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', '0', 'hejvägen 123', ''),
-(1, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', '0', 'hejvägen 123', '');
+INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `bokning`, `namn`, `adress`, `bild`) VALUES
+(0, 0, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', '0', 'hejvägen 123', ''),
+(1, 1, '828fd9255753432d51df95eb62d61722', '14:00:00.000000', 'Tor Fjaestad', 'hejvägen 123', '');
 
 --
 -- Index för dumpade tabeller
@@ -68,7 +54,7 @@ INSERT INTO `users` (`lagenhetsnummer`, `losenord`, `bokning`, `namn`, `adress`,
 -- Index för tabell `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`lagenhetsnummer`);
+  ADD PRIMARY KEY (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
