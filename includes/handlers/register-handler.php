@@ -87,7 +87,7 @@ if(isset($_POST['registerButton'])){
         }
      
     }else{
-        echo("User already exist"); 
+        $_SESSION['alreadyUser'] = $ln;
     }
     
     
