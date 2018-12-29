@@ -79,7 +79,7 @@ if(isset($_POST['registerButton'])){
     if($result->num_rows == 0){
             // Attempt insert query execution
             include('upload-file.php');
-            $sql = "INSERT INTO `users` (`id`, `lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('', '$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , '$target_file');";
+            $sql = "INSERT INTO `users` (`lagenhetsnummer`, `losenord`, `namn` , `adress` , `bild`) VALUES ('$lagenhetsnummer', '$encryptedPassword', '$namn', '$adress' , '$target_file');";
         if(mysqli_query($link, $sql)){
             echo "user added.";
         } else{

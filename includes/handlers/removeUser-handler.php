@@ -21,6 +21,12 @@ try{
     die("ERROR: Could not connect. " . $e->getMessage());
 }
 
+
+$sql2 = "DELETE FROM users WHERE lagenhetsnummer='$ln'";  
+$pdo->query($sql2); 
+if($result->num_rows == 0){
+
+}else {
 //gör en sql query
 $sql = "DELETE FROM users WHERE lagenhetsnummer='$ln'";  
 
@@ -29,11 +35,23 @@ $pdo->query($sql);
 
 
 
+$sqll = "SELECT * FROM schemat WHERE agare='$agare'";  
+$result = $link->query($sqll);
+if($result->num_rows == 0){
 
 
-//this doesn't even give a error .... Weird
+
+}else {
 $sql2 = "DELETE FROM schemat WHERE agare='$ln'";  
 $pdo->query($sql2); 
+//this doesn't even give a error .... Weird
+}
+}
+
+
+
+
+
 
 
 

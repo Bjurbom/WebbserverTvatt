@@ -18,6 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+CREATE DATABASE tvattstugan;
+
 --
 -- Databas: `tvattstugan`
 --
@@ -29,7 +31,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `schemat` (
-  `ägare` int(3) UNSIGNED NOT NULL,
+  'id' int(10) NOT NULL AUTO_INCREMENT,
+  `agare` int(3) UNSIGNED NOT NULL,
   `tidForBokning` time(6) NOT NULL,
   `dagforbokning` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
