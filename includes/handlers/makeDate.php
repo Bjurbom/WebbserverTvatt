@@ -42,7 +42,7 @@ if($result->num_rows == 0){
         //if result is 1 then nothing happens
         if($result->num_rows == 1){
             echo("XD");
-          //  header("Location: ../../user.php");
+            header("Location: ../../user.php");
             //same date and time
             die();
         }else{
